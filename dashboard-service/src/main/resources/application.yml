@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: dashboard-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+gozero:
+  services:
+    ingestion-url: ${INGESTION_BASE_URL:http://localhost:8081}
+    sentiment-url: ${SENTIMENT_BASE_URL:http://localhost:8082}
+    reconciliation-url: ${RECONCILIATION_BASE_URL:http://localhost:8083}
+    connect-timeout-ms: 3000
+    # generous: a pipeline refresh includes a rate-limited scrape
+    read-timeout-ms: 120000

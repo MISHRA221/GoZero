@@ -1,0 +1,112 @@
+{
+  "Belgian Chocolate": [
+    {"author": "Priya S.", "rating": 5, "text": "Rich, creamy and super chocolaty. Hard to believe this is low calorie. My favourite late night treat!"},
+    {"author": "Rahul M.", "rating": 5, "text": "Loved it. Smooth texture and the chocolate tastes authentic, not fake. Will reorder."},
+    {"author": "Ananya K.", "rating": 4, "text": "Very good taste for a guilt-free dessert. Slightly less creamy than regular ice cream but still delicious."},
+    {"author": "Vikram P.", "rating": 2, "text": "The tub arrived half melted and refrozen, so it had ice crystals and a grainy texture. Disappointing."},
+    {"author": "Sneha R.", "rating": 5, "text": "Best low sugar chocolate ice cream I have tried. Perfectly balanced sweetness."},
+    {"author": "Arjun T.", "rating": 3, "text": "Decent, but the stick was small for the price. Taste is fine."}
+  ],
+  "Cookies & Cream": [
+    {"author": "Meera J.", "rating": 5, "text": "Amazing! Generous cookie chunks and very creamy. Totally worth it."},
+    {"author": "Karan D.", "rating": 5, "text": "My kids love this one. Tastes like a premium brand without the sugar crash."},
+    {"author": "Divya N.", "rating": 4, "text": "Really tasty, nice crunchy cookie bits. Would recommend."},
+    {"author": "Siddharth G.", "rating": 2, "text": "Packaging was damaged and the lid was broken when delivered. Ice cream itself was okay."},
+    {"author": "Pooja L.", "rating": 5, "text": "Absolutely yummy and refreshing. No weird aftertaste at all."}
+  ],
+  "Madagascar Vanilla": [
+    {"author": "Ritu A.", "rating": 4, "text": "Classic vanilla, smooth and pleasant. Good with brownies."},
+    {"author": "Nikhil B.", "rating": 2, "text": "Too bland for me. Vanilla flavour is very subtle and it tastes a bit flat."},
+    {"author": "Shalini V.", "rating": 3, "text": "Okay product. The sweetener aftertaste is noticeable in vanilla more than other flavours."},
+    {"author": "Aditya C.", "rating": 5, "text": "Lovely real vanilla bean flavour, creamy and light. Great for diabetics in my family."},
+    {"author": "Farah Q.", "rating": 2, "text": "Overpriced for a small cup. Not worth the money honestly."}
+  ],
+  "Alphonso Mango": [
+    {"author": "Harsh K.", "rating": 2, "text": "Melted completely during delivery and was refrozen. Icy and watery, very disappointing."},
+    {"author": "Tanvi S.", "rating": 1, "text": "Mango tastes artificial and there is a strange chemical aftertaste. Would not buy again."},
+    {"author": "Rohan W.", "rating": 4, "text": "Nice mango flavour, reminds me of aamras. Refreshing in summer."},
+    {"author": "Isha P.", "rating": 2, "text": "Texture was icy with ice crystals everywhere. The texture ruined it."},
+    {"author": "Manish Y.", "rating": 3, "text": "Average. Too sweet for a low sugar product and a bit sticky."},
+    {"author": "Kavya R.", "rating": 5, "text": "Delicious! Tastes like real Alphonso. Loved it."},
+    {"author": "Gaurav J.", "rating": 2, "text": "The stick broke in the packet and it was leaking. Poor packaging for summer delivery."}
+  ],
+  "Salted Caramel": [
+    {"author": "Neha B.", "rating": 5, "text": "Heavenly! The salted caramel is perfectly balanced. Best flavour in the range."},
+    {"author": "Abhishek S.", "rating": 5, "text": "Creamy, indulgent and not too sweet. Absolutely love it."},
+    {"author": "Lakshmi I.", "rating": 4, "text": "Very tasty. A little pricey but worth it for a treat."},
+    {"author": "Varun M.", "rating": 5, "text": "Addictive. Finished the whole tub in two days. Highly recommend."},
+    {"author": "Simran K.", "rating": 3, "text": "Good flavour but the caramel swirl was lacking."}
+  ],
+  "Strawberry Cheesecake": [
+    {"author": "Aishwarya D.", "rating": 4, "text": "Nice tangy cheesecake flavour with real strawberry bits. Pleasant."},
+    {"author": "Kunal R.", "rating": 2, "text": "Strawberry tastes fake and too sugary. Did not enjoy it."},
+    {"author": "Bhavna T.", "rating": 5, "text": "Lovely creamy cheesecake taste. My new favourite!"},
+    {"author": "Mohit A.", "rating": 3, "text": "The cheesecake part is barely there. Average and a bit bland overall."},
+    {"author": "Zoya H.", "rating": 4, "text": "Refreshing and fruity, good for summer evenings."}
+  ],
+  "Coffee Caramel Fudge": [
+    {"author": "Deepak N.", "rating": 5, "text": "Coffee lovers must try. Strong coffee flavour with rich fudge. Excellent."},
+    {"author": "Ira S.", "rating": 4, "text": "Very nice, smooth and not too sweet. Good quality."},
+    {"author": "Prateek L.", "rating": 2, "text": "Bitter aftertaste from the coffee and sweetener combo. Not for me."},
+    {"author": "Nandini G.", "rating": 5, "text": "Superb flavour. Tastes premium. Will buy again."}
+  ],
+  "Hazelnut Crunch": [
+    {"author": "Rhea M.", "rating": 5, "text": "Crunchy hazelnut bits and creamy base. Absolutely delicious."},
+    {"author": "Aman V.", "rating": 4, "text": "Tastes like a healthier Nutella ice cream. Loved it."},
+    {"author": "Sakshi J.", "rating": 2, "text": "Expensive for the quantity. The cup is tiny and half empty with air."},
+    {"author": "Yash T.", "rating": 5, "text": "Fantastic flavour, good crunch. One of the best from Go Zero."},
+    {"author": "Mitali P.", "rating": 3, "text": "Delivery was late and the cup had partly melted. Disappointing."}
+  ],
+  "Blueberry Cheesecake": [
+    {"author": "Parth K.", "rating": 4, "text": "Good blueberry flavour, nice and tangy."},
+    {"author": "Anjali S.", "rating": 2, "text": "Artificial blueberry taste and a chalky texture. Disappointed."},
+    {"author": "Ravi D.", "rating": 3, "text": "Too sweet and sickly after a few spoons."},
+    {"author": "Juhi B.", "rating": 5, "text": "Wonderful! Creamy and fruity, great combo."}
+  ],
+  "Double Chocolate Brownie": [
+    {"author": "Tarun G.", "rating": 5, "text": "Decadent and chocolaty with real brownie chunks. Amazing for a low calorie treat."},
+    {"author": "Shreya A.", "rating": 5, "text": "Best chocolate flavour. Rich and satisfying. Love it."},
+    {"author": "Imran K.", "rating": 4, "text": "Very tasty and indulgent. Good value for money compared to other premium brands."},
+    {"author": "Payal N.", "rating": 2, "text": "Brownie pieces were rock hard and gummy. Texture was poor."},
+    {"author": "Kabir S.", "rating": 5, "text": "Wow, fantastic. Kids and adults both enjoyed it."}
+  ],
+  "Mint Chocolate Chip": [
+    {"author": "Sonal R.", "rating": 2, "text": "Mint tastes like toothpaste and has an artificial aftertaste. Not good."},
+    {"author": "Aakash P.", "rating": 1, "text": "Terrible. Overly sweet with a weird chemical aftertaste from the sweetener."},
+    {"author": "Diya M.", "rating": 4, "text": "Refreshing mint with nice chocolate chips. I enjoyed it."},
+    {"author": "Nitin L.", "rating": 2, "text": "Too few chocolate chips and the mint is very artificial. Disappointing."},
+    {"author": "Esha V.", "rating": 3, "text": "Mint is overpowering and the chips are lacking. Average."}
+  ],
+  "Tender Coconut": [
+    {"author": "Arun K.", "rating": 2, "text": "Very icy texture, more like frozen coconut water. Watery and bland."},
+    {"author": "Latha S.", "rating": 4, "text": "Nice natural coconut flavour with bits of malai. Refreshing."},
+    {"author": "Hemant J.", "rating": 2, "text": "Ice crystals throughout and the texture was grainy. Poor."},
+    {"author": "Preeti G.", "rating": 5, "text": "Loved the fresh tender coconut taste. Light and lovely."},
+    {"author": "Sameer D.", "rating": 2, "text": "The tub was dented and leaking when delivered. Poor packaging."}
+  ],
+  "Kesar Pista": [
+    {"author": "Geeta R.", "rating": 5, "text": "Authentic kesar pista taste like traditional kulfi. Excellent."},
+    {"author": "Omkar S.", "rating": 4, "text": "Nice rich flavour with real pista pieces. Good."},
+    {"author": "Rashmi T.", "rating": 3, "text": "Kulfi stick is tiny and pricey for what you get."},
+    {"author": "Vivek M.", "rating": 2, "text": "Saffron flavour is artificial and too sweet. Not like real kulfi."}
+  ],
+  "Red Velvet": [
+    {"author": "Tanya B.", "rating": 2, "text": "Overpriced. Too expensive for what is basically vanilla with colour."},
+    {"author": "Rajat K.", "rating": 4, "text": "Pretty and tasty, nice cream cheese swirl."},
+    {"author": "Mansi L.", "rating": 2, "text": "Bland and disappointing, cake pieces were soggy."},
+    {"author": "Ayaan R.", "rating": 3, "text": "Not worth the premium price. Would buy only on discount."}
+  ],
+  "Butterscotch Crunch": [
+    {"author": "Suresh P.", "rating": 5, "text": "Classic butterscotch with great crunch. Tastes just like the full sugar version. Loved it."},
+    {"author": "Kriti A.", "rating": 4, "text": "Good value for money, tasty and creamy."},
+    {"author": "Dev S.", "rating": 3, "text": "The praline bits were sticky and chewy. Meh."},
+    {"author": "Aparna N.", "rating": 5, "text": "Yummy and affordable. Perfect family pack."}
+  ],
+  "Choco Almond": [
+    {"author": "Rohit B.", "rating": 5, "text": "Crunchy almond coating and smooth chocolate inside. Excellent snack."},
+    {"author": "Sanya K.", "rating": 4, "text": "Very tasty stick, tastes premium. Good for portion control."},
+    {"author": "Irfan M.", "rating": 2, "text": "Coating cracked and fell off, the box was crushed during delivery."},
+    {"author": "Nidhi T.", "rating": 5, "text": "Love these! Perfect guilt-free dessert after dinner."},
+    {"author": "Chirag V.", "rating": 3, "text": "The multipack is pricey and expensive compared to single sticks."}
+  ]
+}

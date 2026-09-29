@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reconciliation-config
+  namespace: go-zero
+data:
+  SERVER_PORT: "8083"
+  DB_URL: jdbc:postgresql://postgres:5432/reconciliation_db
+  H2_CONSOLE_ENABLED: "false"
+  INGESTION_BASE_URL: http://ingestion-service:8081
+  SIMULATION_SEED: "42"
+  PRICE_VARIANCE_THRESHOLD_PCT: "10.0"
+  JAVA_OPTS: "-XX:MaxRAMPercentage=75 -XX:+UseSerialGC"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: reconciliation-db-secret
+  namespace: go-zero
+type: Opaque
+stringData:
+  DB_USERNAME: reconciliation_user
+  DB_PASSWORD: reconciliation_demo_pw   # must match RECONCILIATION_DB_PASSWORD in postgres-secret
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reconciliation-service
+  namespace: go-zero
+  labels:
+    app: reconciliation-service
+    app.kubernetes.io/part-of: gozero-brand-intelligence
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reconciliation-service
+  template:
+    metadata:
+      labels:
+        app: reconciliation-service
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.36
+          command: ["sh", "-c", "until nc -z postgres 5432; do echo waiting for postgres; sleep 2; done"]
+          resources:
+            requests: { cpu: 10m, memory: 16Mi }
+            limits: { cpu: 50m, memory: 32Mi }
+      containers:
+        - name: reconciliation-service
+          image: gozero/reconciliation-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: reconciliation-config
+            - secretRef:
+                name: reconciliation-db-secret
+          startupProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: http }
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 20
+            failureThreshold: 3
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reconciliation-service
+  namespace: go-zero
+  labels:
+    app: reconciliation-service
+spec:
+  type: ClusterIP
+  selector:
+    app: reconciliation-service
+  ports:
+    - name: http
+      port: 8083
+      targetPort: http

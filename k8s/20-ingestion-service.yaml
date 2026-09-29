@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingestion-config
+  namespace: go-zero
+data:
+  SERVER_PORT: "8081"
+  DB_URL: jdbc:postgresql://postgres:5432/ingestion_db
+  H2_CONSOLE_ENABLED: "false"
+  SCRAPER_ENABLED: "true"
+  SCRAPER_DELAY_MS: "1500"
+  SCRAPER_MAX_PRODUCTS: "25"
+  JAVA_OPTS: "-XX:MaxRAMPercentage=75 -XX:+UseSerialGC"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ingestion-db-secret
+  namespace: go-zero
+type: Opaque
+stringData:
+  DB_USERNAME: ingestion_user
+  DB_PASSWORD: ingestion_demo_pw   # must match INGESTION_DB_PASSWORD in postgres-secret
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestion-service
+  namespace: go-zero
+  labels:
+    app: ingestion-service
+    app.kubernetes.io/part-of: gozero-brand-intelligence
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ingestion-service
+  template:
+    metadata:
+      labels:
+        app: ingestion-service
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.36
+          command: ["sh", "-c", "until nc -z postgres 5432; do echo waiting for postgres; sleep 2; done"]
+          resources:
+            requests: { cpu: 10m, memory: 16Mi }
+            limits: { cpu: 50m, memory: 32Mi }
+      containers:
+        - name: ingestion-service
+          image: gozero/ingestion-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: ingestion-config
+            - secretRef:
+                name: ingestion-db-secret
+          # Initial scrape runs before readiness flips, so allow a generous startup window.
+          startupProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: http }
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 20
+            failureThreshold: 3
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingestion-service
+  namespace: go-zero
+  labels:
+    app: ingestion-service
+spec:
+  type: ClusterIP
+  selector:
+    app: ingestion-service
+  ports:
+    - name: http
+      port: 8081
+      targetPort: http

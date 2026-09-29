@@ -1,0 +1,76 @@
+# dashboard-service has no database, so it needs a ConfigMap but no Secret.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-config
+  namespace: go-zero
+data:
+  SERVER_PORT: "8080"
+  INGESTION_BASE_URL: http://ingestion-service:8081
+  SENTIMENT_BASE_URL: http://sentiment-service:8082
+  RECONCILIATION_BASE_URL: http://reconciliation-service:8083
+  JAVA_OPTS: "-XX:MaxRAMPercentage=75 -XX:+UseSerialGC"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-service
+  namespace: go-zero
+  labels:
+    app: dashboard-service
+    app.kubernetes.io/part-of: gozero-brand-intelligence
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-service
+  template:
+    metadata:
+      labels:
+        app: dashboard-service
+    spec:
+      containers:
+        - name: dashboard-service
+          image: gozero/dashboard-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: dashboard-config
+          startupProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: http }
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 20
+            failureThreshold: 3
+          resources:
+            requests: { cpu: 100m, memory: 192Mi }
+            limits: { cpu: 500m, memory: 384Mi }
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-service
+  namespace: go-zero
+  labels:
+    app: dashboard-service
+spec:
+  type: NodePort   # also reachable via `minikube service dashboard-service -n go-zero`
+  selector:
+    app: dashboard-service
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      nodePort: 30080

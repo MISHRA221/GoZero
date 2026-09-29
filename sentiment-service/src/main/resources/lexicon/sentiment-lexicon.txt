@@ -1,0 +1,213 @@
+# Go Zero review sentiment lexicon
+# Format: <word or phrase> <weight>   (weights -3..+3; longer phrases are matched before single words)
+# Tokens are lowercase with apostrophes removed and hyphens split (e.g. "guilt-free" -> "guilt free").
+
+# ---------- Positive ----------
+love 3
+loved 3
+loving 2
+lovely 2
+amazing 3
+awesome 3
+excellent 3
+fantastic 3
+outstanding 3
+perfect 3
+perfectly 2
+delicious 3
+yummy 3
+tasty 2
+great 2
+good 2
+nice 2
+wonderful 3
+best 3
+favourite 3
+favorite 3
+superb 3
+brilliant 3
+incredible 3
+fabulous 3
+terrific 3
+heavenly 3
+divine 3
+bliss 3
+blissful 3
+scrumptious 3
+enjoy 2
+enjoyed 2
+enjoyable 2
+happy 2
+glad 2
+satisfied 2
+satisfying 2
+creamy 2
+smooth 2
+rich 2
+indulgent 2
+decadent 2
+fresh 2
+refreshing 2
+balanced 2
+authentic 2
+velvety 2
+silky 2
+luscious 2
+flavourful 2
+flavorful 2
+premium 2
+healthy 2
+healthier 2
+generous 2
+affordable 2
+recommend 2
+recommended 2
+reorder 2
+repurchase 2
+addictive 2
+impressed 2
+impressive 2
+pleasant 2
+wow 2
+winner 2
+super 2
+beautifully 2
+gem 2
+treat 1
+natural 1
+real 1
+light 1
+crunchy 1
+fruity 1
+tangy 1
+classic 1
+quality 1
+decent 1
+fine 1
+okay 1
+nicely 1
+fast 1
+quick 1
+prompt 1
+intact 1
+guilt free 2
+value for money 2
+worth it 2
+must try 2
+high quality 2
+just right 2
+well packed 2
+buy again 2
+no aftertaste 2
+on time 1
+
+# ---------- Negative ----------
+bad -2
+terrible -3
+horrible -3
+awful -3
+worst -3
+disgusting -3
+pathetic -3
+gross -3
+nasty -3
+yuck -3
+inedible -3
+hate -3
+hated -3
+waste -3
+rancid -3
+spoiled -3
+expired -3
+overpriced -3
+waste of money -3
+poor -2
+poorly -2
+disappointing -2
+disappointed -2
+disappointment -2
+useless -2
+unhappy -2
+regret -2
+dislike -2
+disliked -2
+avoid -2
+mediocre -2
+underwhelming -2
+overrated -2
+unpleasant -2
+annoying -2
+frustrating -2
+careless -2
+bland -2
+tasteless -2
+weird -2
+artificial -2
+chemical -2
+fake -2
+aftertaste -2
+bitter -2
+stale -2
+icy -2
+grainy -2
+gritty -2
+chalky -2
+watery -2
+rubbery -2
+soggy -2
+melted -2
+refrozen -2
+sickly -2
+cloying -2
+oversweet -2
+toothpaste -2
+leaked -2
+leaking -2
+leak -2
+damaged -2
+broken -2
+crushed -2
+missing -2
+wrong -2
+expensive -2
+costly -2
+refund -2
+headache -2
+bloated -2
+shrinkflation -2
+ruined -2
+ice crystals -2
+too sweet -2
+too sugary -2
+overly sweet -2
+rock hard -2
+half empty -2
+half melted -2
+not worth -2
+broke -1
+cracked -1
+pricey -1
+strange -1
+odd -1
+boring -1
+flat -1
+dull -1
+thin -1
+sour -1
+gummy -1
+chewy -1
+sticky -1
+sugary -1
+melting -1
+dented -1
+late -1
+delayed -1
+tiny -1
+small -1
+average -1
+meh -1
+lacking -1
+lacks -1
+overpowering -1
+unfortunately -1
+sadly -1

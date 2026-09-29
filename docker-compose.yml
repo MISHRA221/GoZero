@@ -1,0 +1,109 @@
+# Go Zero Brand Intelligence Platform - local orchestration
+#   docker compose up --build
+# Dashboard: http://localhost:8080   Swagger: http://localhost:808{0,1,2,3}/swagger-ui.html
+#
+# Demo credentials only. Override via a local .env file (git-ignored) for anything beyond a laptop demo.
+
+name: gozero
+
+x-java-service: &java-service
+  restart: unless-stopped
+  networks: [gozero]
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_demo_pw}
+      INGESTION_DB_PASSWORD: ${INGESTION_DB_PASSWORD:-ingestion_demo_pw}
+      SENTIMENT_DB_PASSWORD: ${SENTIMENT_DB_PASSWORD:-sentiment_demo_pw}
+      RECONCILIATION_DB_PASSWORD: ${RECONCILIATION_DB_PASSWORD:-reconciliation_demo_pw}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [gozero]
+
+  ingestion-service:
+    <<: *java-service
+    build:
+      context: .
+      dockerfile: ingestion-service/Dockerfile
+    image: gozero/ingestion-service:1.0.0
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/ingestion_db
+      DB_USERNAME: ingestion_user
+      DB_PASSWORD: ${INGESTION_DB_PASSWORD:-ingestion_demo_pw}
+      H2_CONSOLE_ENABLED: "false"
+      SCRAPER_ENABLED: ${SCRAPER_ENABLED:-true}
+    ports: ["8081:8081"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  sentiment-service:
+    <<: *java-service
+    build:
+      context: .
+      dockerfile: sentiment-service/Dockerfile
+    image: gozero/sentiment-service:1.0.0
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/sentiment_db
+      DB_USERNAME: sentiment_user
+      DB_PASSWORD: ${SENTIMENT_DB_PASSWORD:-sentiment_demo_pw}
+      H2_CONSOLE_ENABLED: "false"
+      INGESTION_BASE_URL: http://ingestion-service:8081
+    ports: ["8082:8082"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ingestion-service:
+        condition: service_healthy
+
+  reconciliation-service:
+    <<: *java-service
+    build:
+      context: .
+      dockerfile: reconciliation-service/Dockerfile
+    image: gozero/reconciliation-service:1.0.0
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/reconciliation_db
+      DB_USERNAME: reconciliation_user
+      DB_PASSWORD: ${RECONCILIATION_DB_PASSWORD:-reconciliation_demo_pw}
+      H2_CONSOLE_ENABLED: "false"
+      INGESTION_BASE_URL: http://ingestion-service:8081
+    ports: ["8083:8083"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ingestion-service:
+        condition: service_healthy
+
+  dashboard-service:
+    <<: *java-service
+    build:
+      context: .
+      dockerfile: dashboard-service/Dockerfile
+    image: gozero/dashboard-service:1.0.0
+    environment:
+      INGESTION_BASE_URL: http://ingestion-service:8081
+      SENTIMENT_BASE_URL: http://sentiment-service:8082
+      RECONCILIATION_BASE_URL: http://reconciliation-service:8083
+    ports: ["8080:8080"]
+    depends_on:
+      sentiment-service:
+        condition: service_healthy
+      reconciliation-service:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+
+networks:
+  gozero:

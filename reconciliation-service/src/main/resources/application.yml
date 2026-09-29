@@ -1,0 +1,46 @@
+server:
+  port: ${SERVER_PORT:8083}
+
+spring:
+  application:
+    name: reconciliation-service
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:reconciliation_db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: ${H2_CONSOLE_ENABLED:true}
+      path: /h2-console
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+gozero:
+  services:
+    ingestion-url: ${INGESTION_BASE_URL:http://localhost:8081}
+  reconciliation:
+    random-seed: ${SIMULATION_SEED:42}
+    normal-jitter-pct: 5.0
+    anomaly-min-pct: 11.0
+    anomaly-max-pct: 15.0
+    price-anomaly-rate: 0.15
+    stock-anomaly-rate: 0.10
+    assortment-gap-rate: 0.07
+    price-variance-threshold-pct: ${PRICE_VARIANCE_THRESHOLD_PCT:10.0}
+    high-severity-pct: 13.0
