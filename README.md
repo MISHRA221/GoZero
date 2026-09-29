@@ -125,27 +125,6 @@ The H2 console runs on each data service at `/h2-console` (JDBC URL `jdbc:h2:mem
 
 Quick checks with `curl`, which is built into Windows 10+:
 
-```bat
-curl http://localhost:8081/api/ingest/status
-curl http://localhost:8082/api/sentiment/by-flavor
-curl "http://localhost:8082/api/sentiment/complaints?category=MELTING_TEXTURE"
-curl http://localhost:8083/api/reconciliation/alerts
-curl -X POST http://localhost:8080/api/dashboard/refresh
-```
-
----
-
-## If Docker cannot be installed
-
-Docker is optional for this project. The application is already runnable without any container runtime:
-
-```bat
-cd /d %USERPROFILE%\GoZero
-mvn clean install
-set SCRAPER_ENABLED=false
-scripts\run-local.cmd
-```
-
 That path runs all four Spring Boot services as Java 17 processes and uses embedded H2 instead of PostgreSQL. It is the
 appropriate path on a locked corporate laptop.
 
